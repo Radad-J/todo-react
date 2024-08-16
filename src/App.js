@@ -1,4 +1,3 @@
-//import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
@@ -8,15 +7,12 @@ import Form from "./components/Form";
 const LSKEY = "MyTodoApp.todos";
 
 function App() {
-  const [todos, setTodos] = useState([]);
 
   // Retrieve todos from localStorage on initial load
-  useEffect(() => {
+  const [todos, setTodos] = useState(() => {
     const storedTodos = JSON.parse(window.localStorage.getItem(LSKEY));
-    if (storedTodos) {
-      setTodos(storedTodos);
-    }
-  }, []); // Empty array means this effect runs once when the component mounts
+    return storedTodos || [];
+  }) // Empty array means this effect runs once when the component mounts
 
   // Save todos to localStorage when they change
   useEffect(() => {
